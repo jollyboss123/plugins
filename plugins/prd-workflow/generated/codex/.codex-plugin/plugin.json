@@ -1,0 +1,41 @@
+{
+  "name": "prd-workflow",
+  "version": "1.0.0",
+  "description": "Write PRDs, convert PRDs to phased plans, and execute work with validation.",
+  "author": {
+    "name": "jollyboss123",
+    "email": "noreply@example.com",
+    "url": "https://github.com/jollyboss123/plugins"
+  },
+  "homepage": "https://github.com/jollyboss123/plugins",
+  "repository": "https://github.com/jollyboss123/plugins",
+  "license": "MIT",
+  "keywords": [
+    "prd",
+    "planning",
+    "execution",
+    "workflow"
+  ],
+  "skills": "./skills/",
+  "interface": {
+    "displayName": "PRD Workflow",
+    "shortDescription": "Write PRDs, plan phases, execute work.",
+    "longDescription": "Cross-agent workflow bundle for PRD authoring, phased planning, and execution.",
+    "developerName": "jollyboss123",
+    "category": "Productivity",
+    "capabilities": [
+      "Read",
+      "Write",
+      "Planning"
+    ],
+    "websiteURL": "https://github.com/jollyboss123/plugins",
+    "privacyPolicyURL": "https://github.com/jollyboss123/plugins",
+    "termsOfServiceURL": "https://github.com/jollyboss123/plugins",
+    "defaultPrompt": [
+      "Create a PRD for this feature.",
+      "Turn this PRD into phased tracer-bullet plan.",
+      "Execute phase 1 using do-work."
+    ],
+    "brandColor": "#2563EB"
+  }
+}

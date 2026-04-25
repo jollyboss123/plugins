@@ -1,0 +1,14 @@
+{
+  "name": "plugins-monorepo",
+  "private": true,
+  "version": "1.0.0",
+  "description": "NPM-only cross-agent workflow plugin monorepo.",
+  "workspaces": [
+    "packages/*"
+  ],
+  "scripts": {
+    "generate": "node tools/generate-adapters.mjs",
+    "validate": "node tools/validate-artifacts.mjs",
+    "build": "npm run generate && npm run validate"
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "name": "prd-workflow",
+  "version": "1.0.0",
+  "description": "Write PRDs, convert PRDs to phased plans, and execute work with validation.",
+  "scope": "@jollyboss123",
+  "license": "MIT",
+  "workflows": [
+    "write-a-prd",
+    "prd-to-plan",
+    "do-work"
+  ],
+  "parityMode": "behavioral",
+  "invocationPolicy": {
+    "doWorkRequiresPrdToPlan": false,
+    "prdToPlanExplicit": true,
+    "writeAPrdExplicit": true
+  },
+  "install": {
+    "safePostinstallDefault": true,
+    "globalOptInEnv": "PRD_WORKFLOW_INSTALL_GLOBAL"
+  }
+}

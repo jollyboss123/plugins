@@ -1,0 +1,21 @@
+{
+  "name": "@jollyboss123/prd-workflow",
+  "version": "1.0.0",
+  "description": "Write PRDs, convert PRDs to phased plans, and execute work with validation.",
+  "license": "MIT",
+  "type": "commonjs",
+  "bin": {
+    "prd-workflow": "./bin/prd-workflow.js"
+  },
+  "files": [
+    "bin",
+    "payload",
+    "README.md"
+  ],
+  "scripts": {
+    "postinstall": "node ./bin/prd-workflow.js postinstall"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}

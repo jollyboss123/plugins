@@ -61,6 +61,13 @@ function validatePlugin(pluginName) {
     assert(manifest.invocationPolicy?.doWorkRequiresPrdToPlan === false, 'prd-workflow: do-work must remain directly invokable.');
     assert(manifest.workflows.includes('handoff-to-ralph'), 'prd-workflow: optional handoff-to-ralph workflow is required.');
     assert(manifest.workflows.includes('prd-to-issues'), 'prd-workflow: optional prd-to-issues alias workflow is required.');
+    const writePrdPath = path.join(pluginDir, 'workflows', 'write-a-prd.md');
+    const writePrdText = fs.readFileSync(writePrdPath, 'utf8');
+    assert(writePrdText.includes('deep modules'), 'prd-workflow: write-a-prd must include deep-module guidance.');
+    assert(writePrdText.includes('module boundaries'), 'prd-workflow: write-a-prd must include module-boundary confirmation guidance.');
+    assert(writePrdText.includes('test boundaries'), 'prd-workflow: write-a-prd must include test-boundary confirmation guidance.');
+    assert(writePrdText.includes('Optional'), 'prd-workflow: write-a-prd must describe optional GitHub publication mode.');
+    assert(writePrdText.includes('Do not require `gh`'), 'prd-workflow: write-a-prd must not require gh dependency.');
   }
 
   if (pluginName === 'ralph-workloop') {

@@ -24,6 +24,7 @@ Agent/platform artifacts are generated from that single source and committed.
   - `do-work`
   - `handoff-to-ralph` (optional bridge)
   - `prd-to-issues` (optional alias to canonical plugin)
+  - `write-a-prd` includes module-awareness + deep-module planning and optional GitHub publication mode
 - `prd-to-issues`
   - `prd-to-issues` (canonical source for issue-slicing contract)
 - `improve-codebase-architecture`

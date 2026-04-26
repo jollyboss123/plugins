@@ -1,7 +1,7 @@
 # Prompt: prd-to-issues
 
 Canonical plugin: `prd-workflow`  
-Canonical version: `1.2.0`  
+Canonical version: `1.3.0`  
 Workflow ID: `prd-to-issues`
 
 # Workflow: prd-to-issues (Alias)

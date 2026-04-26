@@ -2,7 +2,7 @@
 name: prd-to-issues
 description: Canonical prd-to-issues workflow from prd-workflow.
 canonical_plugin: prd-workflow
-canonical_version: 1.2.0
+canonical_version: 1.3.0
 canonical_source: plugins/prd-workflow/workflows/prd-to-issues.md
 ---
 

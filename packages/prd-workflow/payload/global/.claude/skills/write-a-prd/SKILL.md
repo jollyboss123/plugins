@@ -2,7 +2,7 @@
 name: write-a-prd
 description: Canonical write-a-prd workflow from prd-workflow.
 canonical_plugin: prd-workflow
-canonical_version: 1.2.0
+canonical_version: 1.3.0
 canonical_source: plugins/prd-workflow/workflows/write-a-prd.md
 ---
 
@@ -28,5 +28,13 @@ A PRD document that includes at minimum:
 ## Behavior Contract
 - Clarify ambiguous product intent with focused questions.
 - Verify assumptions against repo context when available.
+- Before finalizing, sketch the major modules to build or modify.
+- Prefer deep modules: simple, stable, testable interfaces that encapsulate substantial implementation complexity.
+- Confirm module boundaries and preferred test boundaries with the user before final output.
 - Avoid unstable implementation details (for example exact file-level code snippets) unless explicitly required.
 - Keep wording actionable for handoff to planning.
+
+## Publication Mode
+- Default: output PRD as a structured repo-agnostic artifact/body.
+- Optional: when GitHub integration is available, provide issue-ready output or create an issue only if requested.
+- Do not require `gh` as a hard dependency in canonical behavior.

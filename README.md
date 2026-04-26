@@ -16,12 +16,16 @@ Agent/platform artifacts are generated from that single source and committed.
 - `tools/`: generation and validation scripts
 - `schemas/`: manifest/reference schemas
 
-## v1 Plugin
+## Current Plugins
 
 - `prd-workflow`
   - `write-a-prd`
   - `prd-to-plan`
   - `do-work`
+  - `handoff-to-ralph` (optional bridge)
+- `ralph-workloop`
+  - `ralph-once`
+  - `ralph-afk`
 
 ## Authoring Workflow
 
@@ -41,23 +45,23 @@ NPM-only in v1. Install a specific plugin package:
 
 ```bash
 npm install @jollyboss123/prd-workflow
+npm install @jollyboss123/ralph-workloop
 ```
 
 Optional explicit installer commands:
 
 ```bash
 npx @jollyboss123/prd-workflow install --local
-npx @jollyboss123/prd-workflow install --global
-npx @jollyboss123/prd-workflow verify
+npx @jollyboss123/ralph-workloop install --local
 ```
 
 Postinstall defaults to safe behavior (local install only).
 Global writes require explicit opt-in.
 
-## Release Checklist
+## Release Automation
 
-1. Bump canonical plugin version in `plugins/<plugin-id>/manifest.json`.
-2. Run `npm run generate`.
-3. Run `npm run build`.
-4. Commit generated changes.
-5. Publish selected package(s).
+Publishing is handled by GitHub Actions release workflows. Before cutting a release:
+
+1. Bump canonical plugin version(s) in `plugins/<plugin-id>/manifest.json`.
+2. Run `npm run build` and commit generated artifacts.
+3. Publish via the configured release workflow.

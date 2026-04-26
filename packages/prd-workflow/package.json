@@ -1,6 +1,6 @@
 {
   "name": "@jollyboss123/prd-workflow",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Write PRDs, convert PRDs to phased plans, and execute work with validation.",
   "license": "MIT",
   "type": "commonjs",

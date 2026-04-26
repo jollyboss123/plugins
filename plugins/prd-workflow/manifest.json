@@ -1,19 +1,46 @@
 {
   "name": "prd-workflow",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Write PRDs, convert PRDs to phased plans, and execute work with validation.",
   "scope": "@jollyboss123",
   "license": "MIT",
   "workflows": [
     "write-a-prd",
     "prd-to-plan",
-    "do-work"
+    "do-work",
+    "handoff-to-ralph"
   ],
   "parityMode": "behavioral",
+  "keywords": [
+    "prd",
+    "planning",
+    "execution",
+    "workflow"
+  ],
+  "interface": {
+    "displayName": "PRD Workflow",
+    "shortDescription": "Write PRDs, plan phases, and execute work.",
+    "longDescription": "Cross-agent workflow bundle for PRD authoring, phased planning, and execution.",
+    "developerName": "jollyboss123",
+    "category": "Productivity",
+    "capabilities": [
+      "Read",
+      "Write",
+      "Planning"
+    ],
+    "defaultPrompt": [
+      "Create a PRD for this feature.",
+      "Turn this PRD into phased tracer-bullet plan.",
+      "Execute phase 1 using do-work.",
+      "Prepare a Ralph handoff packet for phase 2."
+    ],
+    "brandColor": "#2563EB"
+  },
   "invocationPolicy": {
     "doWorkRequiresPrdToPlan": false,
     "prdToPlanExplicit": true,
-    "writeAPrdExplicit": true
+    "writeAPrdExplicit": true,
+    "handoffToRalphOptional": true
   },
   "install": {
     "safePostinstallDefault": true,

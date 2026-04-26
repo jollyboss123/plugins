@@ -1,0 +1,48 @@
+{
+  "name": "ralph-workloop",
+  "version": "1.0.0",
+  "description": "Bounded automation workloops for single-iteration and AFK execution.",
+  "scope": "@jollyboss123",
+  "license": "MIT",
+  "workflows": [
+    "ralph-once",
+    "ralph-afk"
+  ],
+  "parityMode": "behavioral",
+  "keywords": [
+    "automation",
+    "agent-loop",
+    "hitl",
+    "afk",
+    "ralph"
+  ],
+  "interface": {
+    "displayName": "Ralph Workloop",
+    "shortDescription": "Run bounded HITL/AFK automation loops.",
+    "longDescription": "Companion automation plugin for executing one task per iteration with explicit safety gates.",
+    "developerName": "jollyboss123",
+    "category": "Automation",
+    "capabilities": [
+      "Read",
+      "Write",
+      "Planning",
+      "Automation"
+    ],
+    "defaultPrompt": [
+      "Run one Ralph iteration for this task packet.",
+      "Run AFK Ralph for 3 iterations with strict validation gates.",
+      "Prepare bounded stop conditions for this automation loop."
+    ],
+    "brandColor": "#D97706"
+  },
+  "environmentCapabilities": [
+    "shell",
+    "git",
+    "tooling-commands",
+    "agent-cli-optional"
+  ],
+  "install": {
+    "safePostinstallDefault": true,
+    "globalOptInEnv": "RALPH_WORKLOOP_INSTALL_GLOBAL"
+  }
+}

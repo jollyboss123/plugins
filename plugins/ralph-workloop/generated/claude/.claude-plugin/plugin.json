@@ -1,0 +1,18 @@
+{
+  "name": "ralph-workloop",
+  "version": "1.0.0",
+  "description": "Bounded automation workloops for single-iteration and AFK execution.",
+  "author": {
+    "name": "jollyboss123"
+  },
+  "homepage": "https://github.com/jollyboss123/plugins",
+  "repository": "https://github.com/jollyboss123/plugins",
+  "license": "MIT",
+  "keywords": [
+    "automation",
+    "agent-loop",
+    "hitl",
+    "afk",
+    "ralph"
+  ]
+}

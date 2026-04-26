@@ -1,11 +1,17 @@
 {
   "name": "prd-workflow",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Write PRDs, convert PRDs to phased plans, and execute work with validation.",
   "author": {
     "name": "jollyboss123"
   },
   "homepage": "https://github.com/jollyboss123/plugins",
   "repository": "https://github.com/jollyboss123/plugins",
-  "license": "MIT"
+  "license": "MIT",
+  "keywords": [
+    "prd",
+    "planning",
+    "execution",
+    "workflow"
+  ]
 }

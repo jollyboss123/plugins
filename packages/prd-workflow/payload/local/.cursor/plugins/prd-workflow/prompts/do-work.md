@@ -1,7 +1,7 @@
 # Prompt: do-work
 
 Canonical plugin: `prd-workflow`  
-Canonical version: `1.0.0`  
+Canonical version: `1.1.0`  
 Workflow ID: `do-work`
 
 # Workflow: do-work

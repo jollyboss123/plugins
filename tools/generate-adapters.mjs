@@ -2,10 +2,9 @@ import fs from 'node:fs';
 import path from 'node:path';
 
 const root = process.cwd();
-const pluginDir = path.join(root, 'plugins', 'prd-workflow');
-const generatedDir = path.join(pluginDir, 'generated');
-const packageDir = path.join(root, 'packages', 'prd-workflow');
-const payloadDir = path.join(packageDir, 'payload');
+const pluginsRoot = path.join(root, 'plugins');
+const packagesRoot = path.join(root, 'packages');
+const repoUrl = 'https://github.com/jollyboss123/plugins';
 
 function readJson(filePath) {
   return JSON.parse(fs.readFileSync(filePath, 'utf8'));
@@ -31,110 +30,132 @@ function copyDir(sourceDir, targetDir) {
   fs.cpSync(sourceDir, targetDir, { recursive: true });
 }
 
-const manifest = readJson(path.join(pluginDir, 'manifest.json'));
-
-const workflowContents = new Map();
-for (const workflowId of manifest.workflows) {
-  const workflowPath = path.join(pluginDir, 'workflows', `${workflowId}.md`);
-  workflowContents.set(workflowId, fs.readFileSync(workflowPath, 'utf8').trim());
+function maybeCopyDir(sourceDir, targetDir) {
+  if (!fs.existsSync(sourceDir)) return;
+  copyDir(sourceDir, targetDir);
 }
 
-cleanDir(generatedDir);
+function generatePlugin(pluginName) {
+  const pluginDir = path.join(pluginsRoot, pluginName);
+  const generatedDir = path.join(pluginDir, 'generated');
+  const packageDir = path.join(packagesRoot, pluginName);
+  const payloadDir = path.join(packageDir, 'payload');
 
-const codexManifest = {
-  name: manifest.name,
-  version: manifest.version,
-  description: manifest.description,
-  author: {
-    name: 'jollyboss123',
-    email: 'noreply@example.com',
-    url: 'https://github.com/jollyboss123/plugins'
-  },
-  homepage: 'https://github.com/jollyboss123/plugins',
-  repository: 'https://github.com/jollyboss123/plugins',
-  license: manifest.license,
-  keywords: ['prd', 'planning', 'execution', 'workflow'],
-  skills: './skills/',
-  interface: {
-    displayName: 'PRD Workflow',
-    shortDescription: 'Write PRDs, plan phases, execute work.',
-    longDescription: 'Cross-agent workflow bundle for PRD authoring, phased planning, and execution.',
-    developerName: 'jollyboss123',
-    category: 'Productivity',
-    capabilities: ['Read', 'Write', 'Planning'],
-    websiteURL: 'https://github.com/jollyboss123/plugins',
-    privacyPolicyURL: 'https://github.com/jollyboss123/plugins',
-    termsOfServiceURL: 'https://github.com/jollyboss123/plugins',
-    defaultPrompt: [
-      'Create a PRD for this feature.',
-      'Turn this PRD into phased tracer-bullet plan.',
-      'Execute phase 1 using do-work.'
-    ],
-    brandColor: '#2563EB'
+  const manifest = readJson(path.join(pluginDir, 'manifest.json'));
+
+  const workflowContents = new Map();
+  for (const workflowId of manifest.workflows) {
+    const workflowPath = path.join(pluginDir, 'workflows', `${workflowId}.md`);
+    workflowContents.set(workflowId, fs.readFileSync(workflowPath, 'utf8').trim());
   }
-};
-writeJson(path.join(generatedDir, 'codex', '.codex-plugin', 'plugin.json'), codexManifest);
 
-for (const workflowId of manifest.workflows) {
-  const body = workflowContents.get(workflowId);
-  const codexSkill = `---\nname: ${workflowId}\ndescription: Canonical ${workflowId} workflow from ${manifest.name}.\ncanonical_plugin: ${manifest.name}\ncanonical_version: ${manifest.version}\ncanonical_source: plugins/${manifest.name}/workflows/${workflowId}.md\n---\n\n${body}\n`;
-  writeFile(path.join(generatedDir, 'codex', 'skills', workflowId, 'SKILL.md'), codexSkill);
+  cleanDir(generatedDir);
 
-  const claudeSkill = `---\nname: ${workflowId}\ndescription: Canonical ${workflowId} workflow from ${manifest.name}.\ncanonical_plugin: ${manifest.name}\ncanonical_version: ${manifest.version}\ncanonical_source: plugins/${manifest.name}/workflows/${workflowId}.md\n---\n\n${body}\n`;
-  writeFile(path.join(generatedDir, 'claude', '.claude', 'skills', workflowId, 'SKILL.md'), claudeSkill);
+  const codexManifest = {
+    name: manifest.name,
+    version: manifest.version,
+    description: manifest.description,
+    author: {
+      name: manifest.interface?.developerName || 'jollyboss123',
+      email: 'noreply@example.com',
+      url: repoUrl
+    },
+    homepage: repoUrl,
+    repository: repoUrl,
+    license: manifest.license,
+    keywords: manifest.keywords || [],
+    skills: './skills/',
+    interface: {
+      displayName: manifest.interface?.displayName || manifest.name,
+      shortDescription: manifest.interface?.shortDescription || manifest.description,
+      longDescription: manifest.interface?.longDescription || manifest.description,
+      developerName: manifest.interface?.developerName || 'jollyboss123',
+      category: manifest.interface?.category || 'Productivity',
+      capabilities: manifest.interface?.capabilities || ['Read', 'Write'],
+      websiteURL: repoUrl,
+      privacyPolicyURL: repoUrl,
+      termsOfServiceURL: repoUrl,
+      defaultPrompt: manifest.interface?.defaultPrompt || [],
+      brandColor: manifest.interface?.brandColor || '#2563EB'
+    }
+  };
+  writeJson(path.join(generatedDir, 'codex', '.codex-plugin', 'plugin.json'), codexManifest);
 
-  const cursorPrompt = `# Prompt: ${workflowId}\n\nCanonical plugin: \`${manifest.name}\`  \nCanonical version: \`${manifest.version}\`  \nWorkflow ID: \`${workflowId}\`\n\n${body}\n`;
-  writeFile(path.join(generatedDir, 'cursor', 'prompts', `${workflowId}.md`), cursorPrompt);
+  for (const workflowId of manifest.workflows) {
+    const body = workflowContents.get(workflowId);
+    const frontmatter = `---\nname: ${workflowId}\ndescription: Canonical ${workflowId} workflow from ${manifest.name}.\ncanonical_plugin: ${manifest.name}\ncanonical_version: ${manifest.version}\ncanonical_source: plugins/${manifest.name}/workflows/${workflowId}.md\n---\n\n`;
+    writeFile(path.join(generatedDir, 'codex', 'skills', workflowId, 'SKILL.md'), `${frontmatter}${body}\n`);
+    writeFile(path.join(generatedDir, 'claude', '.claude', 'skills', workflowId, 'SKILL.md'), `${frontmatter}${body}\n`);
+
+    const cursorPrompt = `# Prompt: ${workflowId}\n\nCanonical plugin: \`${manifest.name}\`  \nCanonical version: \`${manifest.version}\`  \nWorkflow ID: \`${workflowId}\`\n\n${body}\n`;
+    writeFile(path.join(generatedDir, 'cursor', 'prompts', `${workflowId}.md`), cursorPrompt);
+  }
+
+  const claudePluginManifest = {
+    name: manifest.name,
+    version: manifest.version,
+    description: manifest.description,
+    author: {
+      name: manifest.interface?.developerName || 'jollyboss123'
+    },
+    homepage: repoUrl,
+    repository: repoUrl,
+    license: manifest.license,
+    keywords: manifest.keywords || []
+  };
+  writeJson(path.join(generatedDir, 'claude', '.claude-plugin', 'plugin.json'), claudePluginManifest);
+
+  const cursorPromptList = manifest.workflows.map((workflowId) => `- prompts/${workflowId}.md`).join('\n');
+  writeFile(
+    path.join(generatedDir, 'cursor', 'README.md'),
+    `# Cursor Adapter: ${manifest.name}\n\nGenerated prompt pack for Cursor.\n\n## Prompts\n${cursorPromptList}\n\n## Parity\nBehavior parity is sourced from \`plugins/${manifest.name}/workflows/*.md\`.\n`
+  );
+
+  const packageJsonPath = path.join(packageDir, 'package.json');
+  const packageJson = readJson(packageJsonPath);
+  packageJson.name = `${manifest.scope}/${manifest.name}`;
+  packageJson.version = manifest.version;
+  packageJson.description = manifest.description;
+  packageJson.license = manifest.license;
+  writeJson(packageJsonPath, packageJson);
+
+  cleanDir(payloadDir);
+
+  const localCodexTarget = path.join(payloadDir, 'local', '.codex', 'plugins', manifest.name);
+  copyDir(path.join(generatedDir, 'codex'), localCodexTarget);
+
+  for (const workflowId of manifest.workflows) {
+    const sourceSkill = path.join(generatedDir, 'claude', '.claude', 'skills', workflowId, 'SKILL.md');
+    const localClaudeSkill = path.join(payloadDir, 'local', '.claude', 'skills', workflowId, 'SKILL.md');
+    writeFile(localClaudeSkill, fs.readFileSync(sourceSkill, 'utf8'));
+  }
+
+  const localCursorTarget = path.join(payloadDir, 'local', '.cursor', 'plugins', manifest.name);
+  copyDir(path.join(generatedDir, 'cursor'), localCursorTarget);
+
+  const runtimeDir = path.join(pluginDir, 'runtime');
+  maybeCopyDir(runtimeDir, path.join(payloadDir, 'local', '.ralph', 'plugins', manifest.name, 'runtime'));
+
+  const globalCodexTarget = path.join(payloadDir, 'global', '.codex', 'plugins', manifest.name);
+  copyDir(path.join(generatedDir, 'codex'), globalCodexTarget);
+
+  for (const workflowId of manifest.workflows) {
+    const sourceSkill = path.join(generatedDir, 'claude', '.claude', 'skills', workflowId, 'SKILL.md');
+    const globalClaudeSkill = path.join(payloadDir, 'global', '.claude', 'skills', workflowId, 'SKILL.md');
+    writeFile(globalClaudeSkill, fs.readFileSync(sourceSkill, 'utf8'));
+  }
+
+  maybeCopyDir(runtimeDir, path.join(payloadDir, 'global', '.ralph', 'plugins', manifest.name, 'runtime'));
+
+  console.log(`Generated artifacts for plugin ${manifest.name}@${manifest.version}`);
 }
 
-const claudePluginManifest = {
-  name: manifest.name,
-  version: manifest.version,
-  description: manifest.description,
-  author: {
-    name: 'jollyboss123'
-  },
-  homepage: 'https://github.com/jollyboss123/plugins',
-  repository: 'https://github.com/jollyboss123/plugins',
-  license: manifest.license
-};
-writeJson(path.join(generatedDir, 'claude', '.claude-plugin', 'plugin.json'), claudePluginManifest);
+const pluginNames = fs
+  .readdirSync(pluginsRoot, { withFileTypes: true })
+  .filter((entry) => entry.isDirectory())
+  .map((entry) => entry.name)
+  .sort();
 
-const cursorPromptList = manifest.workflows.map((workflowId) => `- prompts/${workflowId}.md`).join('\n');
-writeFile(
-  path.join(generatedDir, 'cursor', 'README.md'),
-  `# Cursor Adapter: ${manifest.name}\n\nGenerated prompt pack for Cursor.\n\n## Prompts\n${cursorPromptList}\n\n## Parity\nBehavior parity is sourced from \`plugins/${manifest.name}/workflows/*.md\`.\n`
-);
-
-const packageJsonPath = path.join(packageDir, 'package.json');
-const packageJson = readJson(packageJsonPath);
-packageJson.name = `${manifest.scope}/${manifest.name}`;
-packageJson.version = manifest.version;
-packageJson.description = manifest.description;
-packageJson.license = manifest.license;
-writeJson(packageJsonPath, packageJson);
-
-cleanDir(payloadDir);
-
-const localCodexTarget = path.join(payloadDir, 'local', '.codex', 'plugins', manifest.name);
-copyDir(path.join(generatedDir, 'codex'), localCodexTarget);
-
-for (const workflowId of manifest.workflows) {
-  const sourceSkill = path.join(generatedDir, 'claude', '.claude', 'skills', workflowId, 'SKILL.md');
-  const localClaudeSkill = path.join(payloadDir, 'local', '.claude', 'skills', workflowId, 'SKILL.md');
-  writeFile(localClaudeSkill, fs.readFileSync(sourceSkill, 'utf8'));
+for (const pluginName of pluginNames) {
+  generatePlugin(pluginName);
 }
-
-const localCursorTarget = path.join(payloadDir, 'local', '.cursor', 'plugins', manifest.name);
-copyDir(path.join(generatedDir, 'cursor'), localCursorTarget);
-
-const globalCodexTarget = path.join(payloadDir, 'global', '.codex', 'plugins', manifest.name);
-copyDir(path.join(generatedDir, 'codex'), globalCodexTarget);
-
-for (const workflowId of manifest.workflows) {
-  const sourceSkill = path.join(generatedDir, 'claude', '.claude', 'skills', workflowId, 'SKILL.md');
-  const globalClaudeSkill = path.join(payloadDir, 'global', '.claude', 'skills', workflowId, 'SKILL.md');
-  writeFile(globalClaudeSkill, fs.readFileSync(sourceSkill, 'utf8'));
-}
-
-console.log(`Generated artifacts for plugin ${manifest.name}@${manifest.version}`);

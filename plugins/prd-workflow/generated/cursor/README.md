@@ -6,6 +6,7 @@ Generated prompt pack for Cursor.
 - prompts/write-a-prd.md
 - prompts/prd-to-plan.md
 - prompts/do-work.md
+- prompts/handoff-to-ralph.md
 
 ## Parity
 Behavior parity is sourced from `plugins/prd-workflow/workflows/*.md`.

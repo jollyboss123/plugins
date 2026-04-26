@@ -1,0 +1,43 @@
+{
+  "name": "ralph-workloop",
+  "version": "1.0.0",
+  "description": "Bounded automation workloops for single-iteration and AFK execution.",
+  "author": {
+    "name": "jollyboss123",
+    "email": "noreply@example.com",
+    "url": "https://github.com/jollyboss123/plugins"
+  },
+  "homepage": "https://github.com/jollyboss123/plugins",
+  "repository": "https://github.com/jollyboss123/plugins",
+  "license": "MIT",
+  "keywords": [
+    "automation",
+    "agent-loop",
+    "hitl",
+    "afk",
+    "ralph"
+  ],
+  "skills": "./skills/",
+  "interface": {
+    "displayName": "Ralph Workloop",
+    "shortDescription": "Run bounded HITL/AFK automation loops.",
+    "longDescription": "Companion automation plugin for executing one task per iteration with explicit safety gates.",
+    "developerName": "jollyboss123",
+    "category": "Automation",
+    "capabilities": [
+      "Read",
+      "Write",
+      "Planning",
+      "Automation"
+    ],
+    "websiteURL": "https://github.com/jollyboss123/plugins",
+    "privacyPolicyURL": "https://github.com/jollyboss123/plugins",
+    "termsOfServiceURL": "https://github.com/jollyboss123/plugins",
+    "defaultPrompt": [
+      "Run one Ralph iteration for this task packet.",
+      "Run AFK Ralph for 3 iterations with strict validation gates.",
+      "Prepare bounded stop conditions for this automation loop."
+    ],
+    "brandColor": "#D97706"
+  }
+}

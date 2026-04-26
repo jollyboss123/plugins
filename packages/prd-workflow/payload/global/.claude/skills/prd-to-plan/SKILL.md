@@ -2,7 +2,7 @@
 name: prd-to-plan
 description: Canonical prd-to-plan workflow from prd-workflow.
 canonical_plugin: prd-workflow
-canonical_version: 1.0.0
+canonical_version: 1.1.0
 canonical_source: plugins/prd-workflow/workflows/prd-to-plan.md
 ---
 

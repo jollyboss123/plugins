@@ -2,7 +2,7 @@
 name: do-work
 description: Canonical do-work workflow from prd-workflow.
 canonical_plugin: prd-workflow
-canonical_version: 1.0.0
+canonical_version: 1.1.0
 canonical_source: plugins/prd-workflow/workflows/do-work.md
 ---
 

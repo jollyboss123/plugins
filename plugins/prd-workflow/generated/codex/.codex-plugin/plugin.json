@@ -1,6 +1,6 @@
 {
   "name": "prd-workflow",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Write PRDs, convert PRDs to phased plans, and execute work with validation.",
   "author": {
     "name": "jollyboss123",
@@ -19,7 +19,7 @@
   "skills": "./skills/",
   "interface": {
     "displayName": "PRD Workflow",
-    "shortDescription": "Write PRDs, plan phases, execute work.",
+    "shortDescription": "Write PRDs, plan phases, and execute work.",
     "longDescription": "Cross-agent workflow bundle for PRD authoring, phased planning, and execution.",
     "developerName": "jollyboss123",
     "category": "Productivity",
@@ -34,7 +34,8 @@
     "defaultPrompt": [
       "Create a PRD for this feature.",
       "Turn this PRD into phased tracer-bullet plan.",
-      "Execute phase 1 using do-work."
+      "Execute phase 1 using do-work.",
+      "Prepare a Ralph handoff packet for phase 2."
     ],
     "brandColor": "#2563EB"
   }

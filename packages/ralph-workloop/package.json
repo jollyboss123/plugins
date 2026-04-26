@@ -1,0 +1,21 @@
+{
+  "name": "@jollyboss123/ralph-workloop",
+  "version": "1.0.0",
+  "description": "Bounded automation workloops for single-iteration and AFK execution.",
+  "license": "MIT",
+  "type": "commonjs",
+  "bin": {
+    "ralph-workloop": "./bin/ralph-workloop.js"
+  },
+  "files": [
+    "bin",
+    "payload",
+    "README.md"
+  ],
+  "scripts": {
+    "postinstall": "node ./bin/ralph-workloop.js postinstall"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}

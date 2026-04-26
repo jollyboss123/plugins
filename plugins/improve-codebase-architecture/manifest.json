@@ -1,0 +1,40 @@
+{
+  "name": "improve-codebase-architecture",
+  "version": "1.0.0",
+  "description": "Identify architectural friction and design deep-module refactor RFCs.",
+  "scope": "@jollyboss123",
+  "license": "MIT",
+  "workflows": [
+    "improve-codebase-architecture"
+  ],
+  "parityMode": "behavioral",
+  "keywords": [
+    "architecture",
+    "refactor",
+    "deep-modules",
+    "rfc",
+    "design"
+  ],
+  "interface": {
+    "displayName": "Improve Codebase Architecture",
+    "shortDescription": "Find architecture friction and propose deep-module refactors.",
+    "longDescription": "Explores a codebase like an agent, surfaces module-boundary friction, and produces Markdown RFC proposals with interface options.",
+    "developerName": "jollyboss123",
+    "category": "Architecture",
+    "capabilities": [
+      "Read",
+      "Write",
+      "Planning"
+    ],
+    "defaultPrompt": [
+      "Find shallow-module hotspots and propose deep-module candidates.",
+      "Design three interface options for this architectural refactor.",
+      "Produce a Markdown RFC for the recommended architecture change."
+    ],
+    "brandColor": "#14B8A6"
+  },
+  "install": {
+    "safePostinstallDefault": true,
+    "globalOptInEnv": "IMPROVE_ARCH_INSTALL_GLOBAL"
+  }
+}

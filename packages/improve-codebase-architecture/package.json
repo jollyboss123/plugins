@@ -1,0 +1,21 @@
+{
+  "name": "@jollyboss123/improve-codebase-architecture",
+  "version": "1.0.0",
+  "description": "Identify architectural friction and design deep-module refactor RFCs.",
+  "license": "MIT",
+  "type": "commonjs",
+  "bin": {
+    "improve-codebase-architecture": "./bin/improve-codebase-architecture.js"
+  },
+  "files": [
+    "bin",
+    "payload",
+    "README.md"
+  ],
+  "scripts": {
+    "postinstall": "node ./bin/improve-codebase-architecture.js postinstall"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}

@@ -1,0 +1,40 @@
+{
+  "name": "prd-to-issues",
+  "version": "1.0.0",
+  "description": "Convert PRDs into dependency-aware implementation issue slices.",
+  "scope": "@jollyboss123",
+  "license": "MIT",
+  "workflows": [
+    "prd-to-issues"
+  ],
+  "parityMode": "behavioral",
+  "keywords": [
+    "prd",
+    "issues",
+    "planning",
+    "tracer-bullets",
+    "kanban"
+  ],
+  "interface": {
+    "displayName": "PRD to Issues",
+    "shortDescription": "Break PRDs into dependency-aware issue slices.",
+    "longDescription": "Transforms a PRD into thin vertical slices with blockers, HITL/AFK labels, and acceptance criteria templates.",
+    "developerName": "jollyboss123",
+    "category": "Planning",
+    "capabilities": [
+      "Read",
+      "Write",
+      "Planning"
+    ],
+    "defaultPrompt": [
+      "Break this PRD into dependency-aware issue slices.",
+      "Create HITL/AFK issue candidates with blockers.",
+      "Generate issue bodies from this approved PRD."
+    ],
+    "brandColor": "#0EA5E9"
+  },
+  "install": {
+    "safePostinstallDefault": true,
+    "globalOptInEnv": "PRD_TO_ISSUES_INSTALL_GLOBAL"
+  }
+}

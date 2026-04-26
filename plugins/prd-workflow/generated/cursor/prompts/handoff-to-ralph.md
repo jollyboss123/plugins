@@ -1,7 +1,7 @@
 # Prompt: handoff-to-ralph
 
 Canonical plugin: `prd-workflow`  
-Canonical version: `1.1.0`  
+Canonical version: `1.2.0`  
 Workflow ID: `handoff-to-ralph`
 
 # Workflow: handoff-to-ralph

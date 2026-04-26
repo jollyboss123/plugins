@@ -1,0 +1,42 @@
+{
+  "name": "prd-to-issues",
+  "version": "1.0.0",
+  "description": "Convert PRDs into dependency-aware implementation issue slices.",
+  "author": {
+    "name": "jollyboss123",
+    "email": "noreply@example.com",
+    "url": "https://github.com/jollyboss123/plugins"
+  },
+  "homepage": "https://github.com/jollyboss123/plugins",
+  "repository": "https://github.com/jollyboss123/plugins",
+  "license": "MIT",
+  "keywords": [
+    "prd",
+    "issues",
+    "planning",
+    "tracer-bullets",
+    "kanban"
+  ],
+  "skills": "./skills/",
+  "interface": {
+    "displayName": "PRD to Issues",
+    "shortDescription": "Break PRDs into dependency-aware issue slices.",
+    "longDescription": "Transforms a PRD into thin vertical slices with blockers, HITL/AFK labels, and acceptance criteria templates.",
+    "developerName": "jollyboss123",
+    "category": "Planning",
+    "capabilities": [
+      "Read",
+      "Write",
+      "Planning"
+    ],
+    "websiteURL": "https://github.com/jollyboss123/plugins",
+    "privacyPolicyURL": "https://github.com/jollyboss123/plugins",
+    "termsOfServiceURL": "https://github.com/jollyboss123/plugins",
+    "defaultPrompt": [
+      "Break this PRD into dependency-aware issue slices.",
+      "Create HITL/AFK issue candidates with blockers.",
+      "Generate issue bodies from this approved PRD."
+    ],
+    "brandColor": "#0EA5E9"
+  }
+}

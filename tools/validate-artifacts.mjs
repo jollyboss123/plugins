@@ -60,6 +60,7 @@ function validatePlugin(pluginName) {
   if (pluginName === 'prd-workflow') {
     assert(manifest.invocationPolicy?.doWorkRequiresPrdToPlan === false, 'prd-workflow: do-work must remain directly invokable.');
     assert(manifest.workflows.includes('handoff-to-ralph'), 'prd-workflow: optional handoff-to-ralph workflow is required.');
+    assert(manifest.workflows.includes('prd-to-issues'), 'prd-workflow: optional prd-to-issues alias workflow is required.');
   }
 
   if (pluginName === 'ralph-workloop') {
@@ -68,6 +69,18 @@ function validatePlugin(pluginName) {
     assert(Array.isArray(manifest.environmentCapabilities) && manifest.environmentCapabilities.length > 0, 'ralph-workloop: environmentCapabilities declaration is required.');
     assert(fs.existsSync(path.join(pluginDir, 'runtime', 'once.sh')), 'ralph-workloop: runtime once.sh template is required.');
     assert(fs.existsSync(path.join(pluginDir, 'runtime', 'afk.sh')), 'ralph-workloop: runtime afk.sh template is required.');
+  }
+
+  if (pluginName === 'prd-to-issues') {
+    assert(manifest.workflows.includes('prd-to-issues'), 'prd-to-issues: canonical workflow is required.');
+  }
+
+  if (pluginName === 'improve-codebase-architecture') {
+    assert(manifest.workflows.includes('improve-codebase-architecture'), 'improve-codebase-architecture: canonical workflow is required.');
+    const workflowPath = path.join(pluginDir, 'workflows', 'improve-codebase-architecture.md');
+    const workflowText = fs.readFileSync(workflowPath, 'utf8');
+    assert(workflowText.includes('Markdown'), 'improve-codebase-architecture: workflow must specify Markdown RFC output.');
+    assert(!workflowText.includes('gh issue create'), 'improve-codebase-architecture: workflow must not require gh issue creation.');
   }
 
   console.log(`Validation passed for ${manifest.name}@${manifest.version}`);

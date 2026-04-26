@@ -23,6 +23,11 @@ Agent/platform artifacts are generated from that single source and committed.
   - `prd-to-plan`
   - `do-work`
   - `handoff-to-ralph` (optional bridge)
+  - `prd-to-issues` (optional alias to canonical plugin)
+- `prd-to-issues`
+  - `prd-to-issues` (canonical source for issue-slicing contract)
+- `improve-codebase-architecture`
+  - `improve-codebase-architecture` (Markdown RFC output)
 - `ralph-workloop`
   - `ralph-once`
   - `ralph-afk`
@@ -45,6 +50,8 @@ NPM-only in v1. Install a specific plugin package:
 
 ```bash
 npm install @jollyboss123/prd-workflow
+npm install @jollyboss123/prd-to-issues
+npm install @jollyboss123/improve-codebase-architecture
 npm install @jollyboss123/ralph-workloop
 ```
 
@@ -52,6 +59,8 @@ Optional explicit installer commands:
 
 ```bash
 npx @jollyboss123/prd-workflow install --local
+npx @jollyboss123/prd-to-issues install --local
+npx @jollyboss123/improve-codebase-architecture install --local
 npx @jollyboss123/ralph-workloop install --local
 ```
 

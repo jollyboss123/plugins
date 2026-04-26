@@ -1,6 +1,6 @@
 {
   "name": "prd-workflow",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "description": "Write PRDs, convert PRDs to phased plans, and execute work with validation.",
   "scope": "@jollyboss123",
   "license": "MIT",
@@ -8,7 +8,8 @@
     "write-a-prd",
     "prd-to-plan",
     "do-work",
-    "handoff-to-ralph"
+    "handoff-to-ralph",
+    "prd-to-issues"
   ],
   "parityMode": "behavioral",
   "keywords": [
@@ -31,6 +32,7 @@
     "defaultPrompt": [
       "Create a PRD for this feature.",
       "Turn this PRD into phased tracer-bullet plan.",
+      "Break this PRD into issue slices.",
       "Execute phase 1 using do-work.",
       "Prepare a Ralph handoff packet for phase 2."
     ],
@@ -40,7 +42,8 @@
     "doWorkRequiresPrdToPlan": false,
     "prdToPlanExplicit": true,
     "writeAPrdExplicit": true,
-    "handoffToRalphOptional": true
+    "handoffToRalphOptional": true,
+    "prdToIssuesAliasOptional": true
   },
   "install": {
     "safePostinstallDefault": true,

@@ -2,7 +2,7 @@
 name: handoff-to-ralph
 description: Canonical handoff-to-ralph workflow from prd-workflow.
 canonical_plugin: prd-workflow
-canonical_version: 1.1.0
+canonical_version: 1.2.0
 canonical_source: plugins/prd-workflow/workflows/handoff-to-ralph.md
 ---
 

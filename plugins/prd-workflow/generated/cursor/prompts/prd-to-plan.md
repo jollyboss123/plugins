@@ -1,7 +1,7 @@
 # Prompt: prd-to-plan
 
 Canonical plugin: `prd-workflow`  
-Canonical version: `1.1.0`  
+Canonical version: `1.2.0`  
 Workflow ID: `prd-to-plan`
 
 # Workflow: prd-to-plan

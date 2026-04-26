@@ -1,0 +1,21 @@
+{
+  "name": "@jollyboss123/prd-to-issues",
+  "version": "1.0.0",
+  "description": "Convert PRDs into dependency-aware implementation issue slices.",
+  "license": "MIT",
+  "type": "commonjs",
+  "bin": {
+    "prd-to-issues": "./bin/prd-to-issues.js"
+  },
+  "files": [
+    "bin",
+    "payload",
+    "README.md"
+  ],
+  "scripts": {
+    "postinstall": "node ./bin/prd-to-issues.js postinstall"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}
